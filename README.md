@@ -23,7 +23,17 @@ Signify is a real-time sign language recognition app that turns hand gestures in
   
 ---
 
-## 🎥 Demo / Screenshots
+## 🎥 Demo
+
+<p align="center">
+  <a href="assets/demo.mp4">
+    <img src="assets/Logo_demo.png" alt="Signify Demo" width="700">
+  </a>
+</p>
+
+<p align="center">
+  <em>Watch Signify recognize hand gestures, build text, and convert the generated sentence into speech.</em>
+</p>
 
 ---
 
