@@ -126,17 +126,78 @@ Signify recognizes all **26 letters of the ASL alphabet (A–Z)**, along with **
 
 ## 📊 Model / Evaluation
 
+### Overall Performance
+
+Evaluated on a held-out test set of 279 samples across 26 ASL letters + 3 control gestures (Delete, Clear, Space).
+
+| Metric | Score |
+|---|---|
+| Test Accuracy | **93.55%** |
+| Macro Precision | 91.81% |
+| Macro Recall | 91.68% |
+| Macro F1 | 90.87% |
+| Weighted Precision | 94.59% |
+| Weighted Recall | 93.55% |
+| Weighted F1 | 93.49% |
+
+Macro F1 (90.87%) trails weighted F1 (93.49%) by about 2.6 points — a sign that low-support classes pull the unweighted average down more than overall accuracy suggests. **G** and **L** are the clearest examples: with only 3 test samples each, a single misclassification swings their F1 dramatically, so those scores should be read with wide error bars rather than as stable estimates.
+
+The weakest *recall* scores — **U** (0.57) and **E** (0.67) — point to genuine confusion rather than a support artifact, since both classes have a typical sample count in line with the rest. Both letters share a closed-fist handshape with subtle finger positioning differences, which likely makes them harder to separate in landmark space than in raw pixels. This is a natural next target for either more training samples or additional discriminative features (e.g. finger-tip angles) rather than a labeling or data bug.
+
+### Per-Class Performance
+
+| Class | Precision | Recall | F1 |
+|---|---|---|---|
+| A | 0.75 | 1.00 | 0.86 |
+| B | 1.00 | 1.00 | 1.00 |
+| C | 1.00 | 1.00 | 1.00 |
+| D | 1.00 | 1.00 | 1.00 |
+| E | 1.00 | 0.67 | 0.80 |
+| F | 0.80 | 0.80 | 0.80 |
+| G | 0.67 | 0.67 | 0.67 |
+| H | 1.00 | 1.00 | 1.00 |
+| I | 1.00 | 0.88 | 0.93 |
+| J | 1.00 | 1.00 | 1.00 |
+| K | 0.83 | 1.00 | 0.91 |
+| L | 0.60 | 1.00 | 0.75 |
+| M | 1.00 | 0.83 | 0.91 |
+| N | 1.00 | 1.00 | 1.00 |
+| O | 0.70 | 1.00 | 0.82 |
+| P | 1.00 | 0.85 | 0.92 |
+| Q | 1.00 | 0.89 | 0.94 |
+| R | 1.00 | 0.88 | 0.93 |
+| S | 0.93 | 1.00 | 0.97 |
+| T | 0.91 | 1.00 | 0.95 |
+| U | 1.00 | 0.57 | 0.73 |
+| V | 1.00 | 1.00 | 1.00 |
+| W | 0.83 | 1.00 | 0.91 |
+| X | 0.89 | 1.00 | 0.94 |
+| Y | 1.00 | 0.75 | 0.86 |
+| Z | 0.88 | 0.88 | 0.88 |
+| Delete | 0.94 | 1.00 | 0.97 |
+| Clear | 0.96 | 1.00 | 0.98 |
+| Space | 0.93 | 0.93 | 0.93 |
+
 ### Training Curves
 
-[![Training curves](outputs/training_curves.png)](outputs/training_curves.png)
+
+![Training curves](outputs/training_curves.png)
+
+
 
 ### Confusion Matrix
 
-[![Confusion matrix](outputs/confusion_matrix.png)](outputs/confusion_matrix.png)
+
+![Confusion matrix](outputs/confusion_matrix.png)
+
+
 
 ### Confidence Threshold Sweep
 
-[![Confidence threshold sweep](outputs/confidence_threshold_sweep.png)](outputs/confidence_threshold_sweep.png)
+
+![Confidence threshold sweep](outputs/confidence_threshold_sweep.png)
+
+
 
 > Exact accuracy, precision, recall, and F1 scores for the current Keras model are not included yet. They should be added once the final evaluation is available rather than estimated.
 
